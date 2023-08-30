@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.js": "/static/js/main.f413ff36.js",
+    "static/media/Image-nft.gif": "/static/media/Image-nft.fbb75e25fb069167c8a9.gif",
+    "static/media/ArtistsBackground.png": "/static/media/ArtistsBackground.5fc2b3517d695db57db6.png",
+    "static/media/SignUp.png": "/static/media/SignUp.5e7df47d7deba56a609c.png",
+    "static/media/astronaut.png": "/static/media/astronaut.e91242ead2ab2dc7ec93.png",
+    "static/media/image.png": "/static/media/image.a23743918b2ca4b6adcc.png",
+    "static/media/DiscordLogo.svg": "/static/media/DiscordLogo.83d058a725443ad77d607a121aebc738.svg",
+    "static/media/YoutubeLogo.svg": "/static/media/YoutubeLogo.8c725d8768937894942348672daf7a0b.svg",
+    "static/media/RocketLaunch.svg": "/static/media/RocketLaunch.79599b205e1de3d7f0b5fb82c511a680.svg",
+    "static/media/Eye.svg": "/static/media/Eye.c56d9f8940ceff3e660f5296c3f31f7c.svg",
+    "static/media/Logo.svg": "/static/media/Logo.c8dfb81d49485c059ea932bfd7b46e7e.svg",
+    "static/media/Globe.svg": "/static/media/Globe.ec8adaa920b542bfc53b55bc7c1ad1af.svg",
+    "static/media/LockKey.svg": "/static/media/LockKey.61251d3847acd6a56241c50c71cb1263.svg",
+    "static/media/User.svg": "/static/media/User.72b3ede056c60f00d44bfcf6f2b22e66.svg",
+    "static/media/InstagramLogo.svg": "/static/media/InstagramLogo.48057bd448d7c4f48cdf25a1125cf776.svg",
+    "static/media/EnvelopeSimple.svg": "/static/media/EnvelopeSimple.fc793872e1db4ff254f1ee59f520b59e.svg",
+    "static/media/MagnifyingGlass.svg": "/static/media/MagnifyingGlass.7914d3fcac2d177297a3ce9f5307e3ab.svg",
+    "static/media/ArrowRight.svg": "/static/media/ArrowRight.b9d5c9a0be2a61d15b4262cb5b0db4ad.svg",
+    "static/media/TwitterLogo.svg": "/static/media/TwitterLogo.42b24ce0591b2bb88869a4f09d4e4526.svg",
+    "static/media/Copy.svg": "/static/media/Copy.5810da3f3403f731b7af5be77ad6b13b.svg",
+    "index.html": "/index.html",
+    "static/media/Plus.svg": "/static/media/Plus.5aec3834c8f111d026af979d2f13fb4d.svg",
+    "static/media/Cross.svg": "/static/media/Cross.1b7a655a34f3b57079d1b67c01d2d9c8.svg",
+    "main.f413ff36.js.map": "/static/js/main.f413ff36.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.f413ff36.js"
+  ]
+}
