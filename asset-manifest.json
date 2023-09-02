@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/NftMarket/static/js/main.5ef502a4.js",
+    "main.js": "/NftMarket/static/js/main.2624955b.js",
     "static/media/Image-nft.gif": "/NftMarket/static/media/Image-nft.fbb75e25fb069167c8a9.gif",
     "static/media/ArtistsBackground.png": "/NftMarket/static/media/ArtistsBackground.5fc2b3517d695db57db6.png",
     "static/media/SignUp.png": "/NftMarket/static/media/SignUp.5e7df47d7deba56a609c.png",
@@ -23,9 +23,9 @@
     "static/media/Copy.svg": "/NftMarket/static/media/Copy.5810da3f3403f731b7af5be77ad6b13b.svg",
     "static/media/Plus.svg": "/NftMarket/static/media/Plus.5aec3834c8f111d026af979d2f13fb4d.svg",
     "static/media/Cross.svg": "/NftMarket/static/media/Cross.1b7a655a34f3b57079d1b67c01d2d9c8.svg",
-    "main.5ef502a4.js.map": "/NftMarket/static/js/main.5ef502a4.js.map"
+    "main.2624955b.js.map": "/NftMarket/static/js/main.2624955b.js.map"
   },
   "entrypoints": [
-    "static/js/main.5ef502a4.js"
+    "static/js/main.2624955b.js"
   ]
 }
