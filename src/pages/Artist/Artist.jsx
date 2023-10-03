@@ -1,23 +1,20 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { toInteger } from "lodash";
-import AppContext from "../../context";
+import { ReactSVG } from "react-svg";
+import { useParams } from "react-router-dom";
+
+import Loader from "../../components/ui/loader/Loader";
+import { useGetNftsQuery } from "../../redux/slicesApi/fetchData";
+import { useGetArtistsQuery } from "../../redux/slicesApi/fetchData";
 import GridOfCards from "../../components/ui/gridOfCards/GridOfCards";
-import {
-  Container,
-  H1,
-  H2,
-  Text,
-  Signature,
-  GlobeLink,
-} from "../../globalStyles";
-import YoutuveLogo from "../../assets/img/btnIcons/YoutubeLogo.svg";
-import InstagramLogo from "../../assets/img/btnIcons/InstagramLogo.svg";
-import DiscordLogo from "../../assets/img/btnIcons/DiscordLogo.svg";
-import TwitterLogo from "../../assets/img/btnIcons/TwitterLogo.svg";
-import Wallet from "../../assets/img/btnIcons/Copy.svg";
+
 import Plus from "../../assets/img/btnIcons/Plus.svg";
+import Wallet from "../../assets/img/btnIcons/Copy.svg";
+import TwitterLogo from "../../assets/img/btnIcons/TwitterLogo.svg";
+import YoutuveLogo from "../../assets/img/btnIcons/YoutubeLogo.svg";
+import DiscordLogo from "../../assets/img/btnIcons/DiscordLogo.svg";
 import BackgrounImage from "../../assets/img/ArtistsBackground.png";
+import InstagramLogo from "../../assets/img/btnIcons/InstagramLogo.svg";
 import {
   Info,
   Wrap,
@@ -32,27 +29,37 @@ import {
   SocialRow,
   SocialSvg,
 } from "./Artist.styled";
-import { ReactSVG } from "react-svg";
-import Loader from "../../components/ui/loader/Loader";
+import {
+  Container,
+  H1,
+  H2,
+  Text,
+  Signature,
+  GlobeLink,
+} from "../../globalStyles";
+
 
 function Artist() {
   const { id } = useParams();
-  const { artists, nftCards, nftsIsLoaded, artistsIsLoaded } =
-    React.useContext(AppContext);
+  const { data: artistsData, isSuccess: artistsIsLoaded } =
+    useGetArtistsQuery();
+  const { data: nftsData, isSuccess: nftsIsLoaded } = useGetNftsQuery();
 
-  const currentArtist = artists.filter(
-    (artist) => artist.id === toInteger(id)
-  )[0];
+  const currentArtist = artistsIsLoaded
+    ? artistsData.record.filter((artist) => artist.id === toInteger(id))[0]
+    : "";
 
   const filterNftCards = () => {
-    return nftCards.filter((nftCard) => nftCard.artistId === toInteger(id));
+    return nftsData.record.filter(
+      (nftCard) => nftCard.artistId === toInteger(id)
+    );
   };
 
-  const filtredCards = filterNftCards();
+  const filtredCards = nftsIsLoaded ? filterNftCards() : "";
 
   return (
     <Wrap>
-      {nftsIsLoaded && artistsIsLoaded ? (
+      {artistsIsLoaded && nftsIsLoaded ? (
         <>
           <PageHeader url={BackgrounImage}>
             <Container>

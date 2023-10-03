@@ -2,16 +2,18 @@ import React from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { CgMenuLeft } from "react-icons/cg";
 import { ReactSVG } from "react-svg";
-import logoSvg from "../../assets/img/Logo.svg";
-import userSvg from "../../assets/img/User.svg";
+
 import {
   Wrap,
   Nav,
   Logo,
   NavItem,
   NavText,
-  MobileMenuIcon,LogoText
+  MobileMenuIcon,
+  LogoText,
 } from "./Header.styeld";
+import logoSvg from "../../assets/img/Logo.svg";
+import userSvg from "../../assets/img/User.svg";
 
 function Header() {
   const [menuClicked, setMenuClicked] = React.useState(false);
@@ -20,8 +22,8 @@ function Header() {
   };
 
   return (
-    <Wrap >
-      <Logo to="/" >
+    <Wrap>
+      <Logo to="/">
         <ReactSVG src={logoSvg} alt="logo" />
         <LogoText>NFT'S STORE</LogoText>
       </Logo>

@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import { useNavigate } from "react-router-dom";
+
 import {
   FooterSection,
   HeaderText,
@@ -15,12 +16,13 @@ import {
   Hr,
   LogoText,
 } from "./Footer.styled";
+
 import { Container } from "../../globalStyles";
 import LogoSvg from "../../assets/img/Logo.svg";
 import YoutubeSvg from "../../assets/img/btnIcons/YoutubeLogo.svg";
-import InstagramSvg from "../../assets/img/btnIcons/InstagramLogo.svg";
 import DiscordSvg from "../../assets/img/btnIcons/DiscordLogo.svg";
 import TwitterSvg from "../../assets/img/btnIcons/TwitterLogo.svg";
+import InstagramSvg from "../../assets/img/btnIcons/InstagramLogo.svg";
 
 const Footer = () => {
   const navigate = useNavigate();

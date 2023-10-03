@@ -1,6 +1,9 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import { useForm } from "react-hook-form";
+
+import Modal from "../ui/RegistrationModal/Modal";
+
 import {
   Wrap,
   Image,
@@ -13,7 +16,6 @@ import {
   Btn,
 } from "./Subscribe.styled";
 import { Container, H2, Text } from "../../globalStyles";
-import Modal from "../ui/RegistrationModal/Modal";
 import SubscribeImage from "../../assets/img/astronaut.png";
 import MailIcon from "../../assets/img/btnIcons/EnvelopeSimple.svg";
 

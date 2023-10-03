@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, H2, H3, Text } from "../../globalStyles";
+
 import {
   Wrap,
   Header,
@@ -9,6 +9,7 @@ import {
   DescriptionText,
 } from "./Info.styled";
 import { ReactSVG } from "react-svg";
+import { Container, H2, H3, Text } from "../../globalStyles";
 
 const Info = () => {
   const Info = [

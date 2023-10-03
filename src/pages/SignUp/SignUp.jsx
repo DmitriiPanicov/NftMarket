@@ -1,6 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { ReactSVG } from "react-svg";
+
+import Modal from "../../components/ui/RegistrationModal/Modal";
+
+import { H1, Text } from "../../globalStyles";
+import SignUpImg from "../../assets/img/SignUp.png";
+import User from "../../assets/img/btnIcons/User.svg";
+import Mail from "../../assets/img/btnIcons/EnvelopeSimple.svg";
+import LockKey from "../../assets/img/btnIcons/LockKey.svg";
 import {
   Wrap,
   Image,
@@ -12,12 +20,6 @@ import {
   ErrorMassage,
   Btn,
 } from "./SignUp.styled";
-import { H1, Text } from "../../globalStyles";
-import SignUpImg from "../../assets/img/SignUp.png";
-import User from "../../assets/img/btnIcons/User.svg";
-import Mail from "../../assets/img/btnIcons/EnvelopeSimple.svg";
-import LockKey from "../../assets/img/btnIcons/LockKey.svg";
-import Modal from "../../components/ui/RegistrationModal/Modal";
 
 function SignUp() {
   const [isOpen, setIsOpen] = React.useState(false);

@@ -1,7 +1,9 @@
 import React from "react";
-import { Cards, CardsLine } from "./GridOfCards.styled";
-import useColumnsRender from "../../../hooks/useColumnsRender";
+
 import NftCard from "../nftCard/NftCard";
+import useColumnsRender from "../../../hooks/useColumnsRender";
+
+import { Cards, CardsLine } from "./GridOfCards.styled";
 
 const GridOfCards = ({cards}) => {
   const [columns, setColumns] = React.useState(4);
@@ -9,8 +11,7 @@ const GridOfCards = ({cards}) => {
   const res = useColumnsRender(cards, columns);
 
   React.useEffect(() => {
-    const hh = () => setInnerWidth(window.innerWidth);
-    window.addEventListener("resize", hh);
+    window.addEventListener("resize", () => setInnerWidth(window.innerWidth));
   });
 
   React.useEffect(() => {

@@ -1,17 +1,23 @@
 import React from "react";
-import MyLoader from "./Skeleton";
-import AppContext from "../../context";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Wrap, Grid, Card, Image, Svg, Caption } from "./Categories.styled";
+
+import MyLoader from "./Skeleton";
+import { setActiveCategory } from "../../redux/slices/filterSlice";
+import { useGetCategoriesQuery } from "../../redux/slicesApi/fetchData";
+
 import { Container, H2, Text } from "../../globalStyles";
+import { Wrap, Grid, Card, Image, Svg, Caption } from "./Categories.styled";
 
 const Categories = () => {
-  const { categories, categoriesIsLoaded, setActiveCategory } =
-    React.useContext(AppContext);
+  const { data: categoriesData, isSuccess: categoriesIsLoaded } =
+    useGetCategoriesQuery();
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onCklickCategory = (id) => {
-    setActiveCategory(id);
+    dispatch(setActiveCategory(id));
     navigate("/marketplace");
     window.scrollTo(0, 0);
   };
@@ -22,7 +28,7 @@ const Categories = () => {
         <H2>Browse Categories</H2>
         <Grid>
           {categoriesIsLoaded
-            ? categories.map((category) => (
+            ? categoriesData.record.map((category) => (
                 <Card
                   key={category.id}
                   onClick={() => onCklickCategory(category.id)}

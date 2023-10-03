@@ -1,5 +1,14 @@
 import React from "react";
+import { ReactSVG } from "react-svg";
+import { useNavigate } from "react-router-dom";
+
+import {
+  useGetArtistsQuery,
+  useGetNftsQuery,
+} from "../../redux/slicesApi/fetchData";
+
 import { Container, H1, Text } from "../../globalStyles";
+import Eye from "../../assets/img/btnIcons/Eye.svg";
 import {
   Background,
   Preload,
@@ -8,22 +17,21 @@ import {
   Icon,
   Btn,
 } from "./DailyNft.styled";
-import { ReactSVG } from "react-svg";
-import Eye from "../../assets/img/btnIcons/Eye.svg";
-import AppContext from "../../context";
-import { useNavigate } from "react-router-dom";
 
 const DailyNft = () => {
   const DAILY_NFT_ID = 0;
-
-  const { artists, nftCards, nftsIsLoaded, artistsIsLoaded } =
-    React.useContext(AppContext);
-
   const navigate = useNavigate();
-  const currentNft = nftCards.filter((item) => item.id === DAILY_NFT_ID)[0];
-  const currentArtist = artists.filter(
-    (item) => item.id === currentNft.artistId
-  )[0];
+
+  const { data: artistsData, isSuccess: artistsIsLoaded } =
+    useGetArtistsQuery();
+  const { data: nftsData, isSuccess: nftsIsLoaded } = useGetNftsQuery();
+
+  const currentNft = nftsIsLoaded
+    ? nftsData.record.filter((item) => item.id === DAILY_NFT_ID)[0]
+    : "";
+  const currentArtist = artistsIsLoaded
+    ? artistsData.record.filter((item) => item.id === currentNft.artistId)[0]
+    : "";
 
   const artistClick = (id) => {
     navigate(`/artist/${id}`);

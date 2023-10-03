@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useGetArtistsQuery } from "../../../redux/slicesApi/fetchData";
+
 import {
   Card,
   CardImage,
@@ -10,11 +13,16 @@ import {
   Name,
   AdditionalInfoBlock,
 } from "./NftCard.styled";
-import AppContext from "../../../context";
 
 function NftCard({ nftCard }) {
   const navigate = useNavigate();
-  const { artists } = React.useContext(AppContext);
+  const { data: artistsData, isSuccess: artistsIsLoaded } =
+    useGetArtistsQuery();
+
+  const currentArtist = artistsIsLoaded
+    ? artistsData.record.filter((artist) => artist.id === nftCard.artistId)[0]
+    : "";
+
   const heandleClick = () => {
     navigate(`/nft/${nftCard.id}`);
     window.scroll(0, 0);
@@ -26,15 +34,8 @@ function NftCard({ nftCard }) {
       <InfoBlock>
         <CardTitle>{nftCard.title}</CardTitle>
         <ArtistBlock>
-          <Icon
-            src={
-              artists.filter((artist) => artist.id === nftCard.artistId)[0]
-                .imageUrl
-            }
-          />
-          <Name>
-            {artists.filter((artist) => artist.id === nftCard.artistId)[0].name}
-          </Name>
+          <Icon src={currentArtist.imageUrl} />
+          <Name>{currentArtist.name}</Name>
         </ArtistBlock>
         <AdditionalInfoBlock>
           <div>

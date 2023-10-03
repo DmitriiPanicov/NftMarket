@@ -1,9 +1,12 @@
 import React from "react";
-import AppContext from "../../context";
-import { useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
-import rocketLaunch from "../../assets/img/btnIcons/RocketLaunch.svg";
+import { useNavigate } from "react-router-dom";
+
 import MyLoader from "./Skeleton";
+import { useGetArtistsQuery } from "../../redux/slicesApi/fetchData";
+
+import { Container, H2, Text } from "../../globalStyles";
+import rocketLaunch from "../../assets/img/btnIcons/RocketLaunch.svg";
 import {
   Btn,
   MobileBtn,
@@ -20,11 +23,10 @@ import {
   Value,
   Index,
 } from "./TopArtists.styled";
-import { Container, H2, Text } from "../../globalStyles";
 
 const TopArtists = () => {
   const ARTISTS_IN_GRID = 12;
-  const { artists, artistsIsLoaded } = React.useContext(AppContext);
+  const {data : artistsData, isSuccess : artistsIsLoaded} = useGetArtistsQuery();
   const navigate = useNavigate();
   const btnClick = () => {
     navigate(`/ranking`);
@@ -50,7 +52,7 @@ const TopArtists = () => {
         </Header>
         <Grid>
           {artistsIsLoaded
-            ? artists.slice(0, ARTISTS_IN_GRID).map((artist, index) => (
+            ? artistsData.record.slice(0, ARTISTS_IN_GRID).map((artist, index) => (
                 <ArtistCard
                   key={artist.id}
                   onClick={() => artistClick(artist.id)}
@@ -66,7 +68,7 @@ const TopArtists = () => {
                   <Index>{index + 1}</Index>
                 </ArtistCard>
               ))
-            : [...Array(12)].map((_, index) => <MyLoader key={index} />)}
+            : [...Array(ARTISTS_IN_GRID)].map((_, index) => <MyLoader key={index} />)}
         </Grid>
         <MobileBtn onClick={() => btnClick()}>
           <ReactSVG src={rocketLaunch} />

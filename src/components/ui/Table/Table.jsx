@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 import {
   TableStyled,
   TableHead,
@@ -39,13 +40,13 @@ function Table({ sortedArtists }) {
             <Index>{index + 1}</Index>
             <Icon src={artist.imageUrl} />
             <Name>{artist.name}</Name>
-            <Change change_in_sales={artist.change_in_sales}>
-              {artist.change_in_sales > 0
-                ? `+${artist.change_in_sales}`
-                : artist.change_in_sales}
+            <Change changeInSales={artist.changeInSales}>
+              {artist.changeInSales > 0
+                ? `+${artist.changeInSales}`
+                : artist.changeInSales}
               %
             </Change>
-            <Sold>{artist.nfts_sold.toString().padStart(3, "0")}</Sold>
+            <Sold>{artist.nftsSold.toString().padStart(3, "0")}</Sold>
             <Value>{artist.volume} ETH</Value>
           </ArtistRow>
         ))}

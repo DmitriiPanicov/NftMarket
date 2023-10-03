@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
-import { Wrap, SortCategories, SortList } from "./Rnaking.styled";
-import { Container, H1, Text } from "../../globalStyles";
+
 import Table from "../../components/ui/Table/Table";
 import Loader from "../../components/ui/loader/Loader";
-import AppContext from "../../context";
+import { useGetArtistsQuery } from "../../redux/slicesApi/fetchData";
+
+import { Container, H1, Text } from "../../globalStyles";
+import { Wrap, SortCategories, SortList } from "./Rnaking.styled";
 
 function Ranking() {
   const sortCategories = ["Artist", "Change", "NFTs Sold", "Volume"];
   const _ = require("lodash");
 
-  const { artists, artistsIsLoaded } = React.useContext(AppContext);
+  const { data: artistsData, isSuccess: artistsIsLoaded } = useGetArtistsQuery();
+
   const [sortFilter, setSortFilter] = React.useState(2);
   const [sortType, setSortType] = React.useState(true);
   const previousValue = React.useRef(null);
@@ -22,9 +25,9 @@ function Ranking() {
     if (sortFilter === 0) {
       return _.orderBy(artists, "name", sortType ? "desc" : "asc");
     } else if (sortFilter === 1) {
-      return _.orderBy(artists, "change_in_sales", sortType ? "asc" : "desc");
+      return _.orderBy(artists, "changeInSales", sortType ? "asc" : "desc");
     } else if (sortFilter === 2) {
-      return _.orderBy(artists, "nfts_sold", sortType ? "asc" : "desc");
+      return _.orderBy(artists, "nftsSold", sortType ? "asc" : "desc");
     } else {
       return _.orderBy(artists, "volume", sortType ? "asc" : "desc");
     }
@@ -66,7 +69,7 @@ function Ranking() {
             </SortList>
           ))}
         </SortCategories>
-        {artistsIsLoaded ? renderArtists(artists) : <Loader />}
+        {artistsIsLoaded ? renderArtists(artistsData.record) : <Loader />}
       </Wrap>
     </Container>
   );

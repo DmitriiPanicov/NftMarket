@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, H1, Text } from "../../globalStyles.js";
+import { ReactSVG } from "react-svg";
+
 import {
   Wrap,
   TextWrap,
@@ -11,10 +12,9 @@ import {
   Signature,
   Btn,
 } from "./Description.styled.js";
-
-import rocketLaunch from "../../assets/img/btnIcons/RocketLaunch.svg";
 import nftGif from "../../assets/img/Image-nft.gif";
-import { ReactSVG } from "react-svg";
+import { Container, H1, Text } from "../../globalStyles.js";
+import rocketLaunch from "../../assets/img/btnIcons/RocketLaunch.svg";
 
 function Description() {
   return (
@@ -23,8 +23,8 @@ function Description() {
         <TextWrap>
           <H1>Discover Digital Art & Collect NFTs</H1>
           <Text>
-            NFT Marketplace Created With AI. Collect, Buy And
-            Sell Art From More Than 20k NFT Artists.
+            NFT Marketplace Created With AI. Collect, Buy And Sell Art From More
+            Than 20k NFT Artists.
           </Text>
         </TextWrap>
         <Link to="/sign-up" style={{ display: "contents" }}>

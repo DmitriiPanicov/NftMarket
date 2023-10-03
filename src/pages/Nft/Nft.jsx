@@ -1,9 +1,16 @@
 import React from "react";
-import AppContext from "../../context";
-import { useParams, useNavigate } from "react-router-dom";
 import { toInteger } from "lodash";
 import { ReactSVG } from "react-svg";
+import { useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+
+import Loader from "../../components/ui/loader/Loader";
+import { useGetNftsQuery } from "../../redux/slicesApi/fetchData";
+import { setActiveCategory } from "../../redux/slices/filterSlice";
+import { useGetArtistsQuery } from "../../redux/slicesApi/fetchData";
 import GridOfCards from "../../components/ui/gridOfCards/GridOfCards";
+import { useGetCategoriesQuery } from "../../redux/slicesApi/fetchData";
+
 import Globe from "../../assets/img/btnIcons/Globe.svg";
 import ArrowRight from "../../assets/img/btnIcons/ArrowRight.svg";
 import {
@@ -29,36 +36,33 @@ import {
   Signature,
   GlobeLink,
 } from "../../globalStyles";
-import Loader from "../../components/ui/loader/Loader";
 
 function Nft() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const {
-    artists,
-    nftCards,
-    categories,
-    nftsIsLoaded,
-    artistsIsLoaded,
-    categoriesIsLoaded,
-    setActiveCategory,
-  } = React.useContext(AppContext);
+  const { data: categoriesData, isSuccess: categoriesIsLoaded } =
+    useGetCategoriesQuery();
+  const { data: artistsData, isSuccess: artistsIsLoaded } =
+    useGetArtistsQuery();
+  const { data: nftsData, isSuccess: nftsIsLoaded } = useGetNftsQuery();
 
-  const currentNft = nftCards.filter(
-    (nftCard) => nftCard.id === toInteger(id)
-  )[0];
-  const currentArtist = artists.find(
-    (artist) => artist.id === currentNft.artistId
-  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const currentNft = nftsIsLoaded
+    ? nftsData.record.filter((nftCard) => nftCard.id === toInteger(id))[0]
+    : "";
+  const currentArtist = artistsIsLoaded
+    ? artistsData.record.find((artist) => artist.id === currentNft.artistId)
+    : "";
 
   const filterNftCards = () => {
-    return nftCards.filter(
+    return nftsData.record.filter(
       (nftCard) =>
         nftCard.artistId === currentNft.artistId && nftCard.id !== currentNft.id
     );
   };
 
-  const filtredCards = filterNftCards();
+  const filtredCards = nftsIsLoaded ? filterNftCards() : "";
 
   const artistClick = (id) => {
     navigate(`/artist/${id}`);
@@ -66,7 +70,7 @@ function Nft() {
   };
 
   const categoryClick = (id) => {
-    setActiveCategory(id);
+    dispatch(setActiveCategory(id));
     navigate(`/marketplace/`);
     window.scroll(0, 0);
   };
@@ -110,7 +114,7 @@ function Nft() {
             <TextBlock>
               <Signature>Categories</Signature>
               <CategoriesRow>
-                {categories
+                {categoriesData.record
                   .filter((category) => category.id === currentNft.category)
                   .map((category) => (
                     <Category onClick={() => categoryClick(category.id)}>
@@ -134,7 +138,7 @@ function Nft() {
           </ArtistCards>
         </Container>
       ) : (
-        <Loader/>
+        <Loader />
       )}
     </Wrap>
   );

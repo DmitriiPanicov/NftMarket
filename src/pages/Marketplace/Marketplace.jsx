@@ -1,35 +1,42 @@
 import React from "react";
-import AppContext from "../../context";
+import { useDispatch, useSelector } from "react-redux";
+
+import Loader from "../../components/ui/loader/Loader";
+import { setActiveCategory } from "../../redux/slices/filterSlice";
 import SearchBlock from "../../components/SearchBlock/SearchBlock";
 import GridOfCards from "../../components/ui/gridOfCards/GridOfCards";
-import { Wrap, Header, Categories, Category, Hr } from "./Marketplace.styled";
+import {
+  useGetCategoriesQuery,
+  useGetArtistsQuery,
+  useGetNftsQuery,
+} from "../../redux/slicesApi/fetchData";
+
 import { Container, H1, Text } from "../../globalStyles";
-import Loader from "../../components/ui/loader/Loader";
+import { Wrap, Header, Categories, Category, Hr } from "./Marketplace.styled";
 
 function Marketplace() {
-  const {
-    nftCards,
-    nftsIsLoaded,
-    artistsIsLoaded,
-    categories,
-    categoriesIsLoaded,
-    activeCategory,
-    setActiveCategory,
-  } = React.useContext(AppContext);
-
+  const activeCategory = useSelector((state) => state.filter.activeCategory);
   const [value, setValue] = React.useState("");
+  const { data: categoriesData, isSuccess: categoriesIsLoaded } =
+    useGetCategoriesQuery();
+  const { isSuccess: artistsIsLoaded } = useGetArtistsQuery();
+  const { data: nftsData, isSuccess: nftsIsLoaded } = useGetNftsQuery();
+
+  const dispatch = useDispatch();
 
   const filterNftCards = () => {
     return (
       activeCategory
-        ? nftCards.filter((nftCards) => nftCards.category === activeCategory)
-        : nftCards
+        ? nftsData.record.filter(
+            (nftCards) => nftCards.category === activeCategory
+          )
+        : nftsData.record
     ).filter((nftCards) =>
       nftCards.title.toLowerCase().includes(value.toLowerCase())
     );
   };
 
-  const filtredCards = filterNftCards();
+  const filtredCards = nftsIsLoaded ? filterNftCards() : null;
 
   return (
     <Wrap>
@@ -44,9 +51,9 @@ function Marketplace() {
       {nftsIsLoaded && artistsIsLoaded && categoriesIsLoaded ? (
         <Container>
           <Categories>
-            {categories.map((item) => (
+            {categoriesData.record.map((item) => (
               <Category
-                onClick={() => setActiveCategory(item.id)}
+                onClick={() => dispatch(setActiveCategory(item.id))}
                 key={item.id}
                 className={activeCategory === item.id ? "active" : ""}
               >

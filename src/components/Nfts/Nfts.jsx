@@ -1,32 +1,39 @@
 import React from "react";
-import AppContext from "../../context";
 import { useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
-import GridOfCards from "../ui/gridOfCards/GridOfCards";
+import { useDispatch } from "react-redux";
 
-import { Wrap, Header, TextBlock, Row, Btn, MobileBtn } from "./Nfts.styled";
-import { Container, H2, Text } from "../../globalStyles";
+import {
+  useGetArtistsQuery,
+  useGetNftsQuery,
+} from "../../redux/slicesApi/fetchData";
+import GridOfCards from "../ui/gridOfCards/GridOfCards";
+import { setActiveCategory } from "../../redux/slices/filterSlice";
+
 import Eye from "../../assets/img/btnIcons/Eye.svg";
+import { Container, H2, Text } from "../../globalStyles";
+import { Wrap, Header, TextBlock, Row, Btn, MobileBtn } from "./Nfts.styled";
 
 function Nfts() {
   const FIRST_CARD_INDEX = 7;
 
-  const { nftCards, nftsIsLoaded, artistsIsLoaded, setActiveCategory } =
-    React.useContext(AppContext);
-
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(`/marketplace`);
-    setActiveCategory(0);
-    window.scroll(0, 0);
-  };
-
   const [numberOfCards, setNumberOfCards] = React.useState(4);
   const [innerWidth, setInnerWidth] = React.useState(window.innerWidth);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { isSuccess: artistsIsLoaded } = useGetArtistsQuery();
+  const { data: nftsData, isSuccess: nftsIsLoaded } = useGetNftsQuery();
+
+  const handleClick = () => {
+    navigate(`/marketplace`);
+    dispatch(setActiveCategory(0));
+    window.scroll(0, 0);
+  };
+
   React.useEffect(() => {
-    const hh = () => setInnerWidth(window.innerWidth);
-    window.addEventListener("resize", hh);
+    window.addEventListener("resize", () => setInnerWidth(window.innerWidth));
   });
 
   React.useEffect(() => {
@@ -39,10 +46,9 @@ function Nfts() {
     }
   }, [innerWidth]);
 
-  const filtredCards = nftCards.slice(
-    FIRST_CARD_INDEX,
-    FIRST_CARD_INDEX + numberOfCards
-  );
+  const filtredCards = nftsIsLoaded
+    ? nftsData.record.slice(FIRST_CARD_INDEX, FIRST_CARD_INDEX + numberOfCards)
+    : "";
 
   return (
     <Container>

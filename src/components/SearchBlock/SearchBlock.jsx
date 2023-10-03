@@ -1,4 +1,5 @@
 import React from "react";
+
 import { SearchForm, SearchSvg, CrossSvg } from "./SearchBlock.styled";
 import searchSvg from "../../assets/img/btnIcons/MagnifyingGlass.svg";
 import crossSvg from "../../assets/img/btnIcons/Cross.svg";

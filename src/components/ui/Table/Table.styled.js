@@ -147,7 +147,7 @@ const Text = styled.span`
 `;
 
 export const Change = styled(Text)`
-  color: ${({ change_in_sales }) => (change_in_sales >= 0 ? "#00AC4F" : "red")};
+  color: ${({ changeInSales }) => (changeInSales >= 0 ? "#00AC4F" : "red")};
   @media screen and (max-width: 720px) {
     flex-basis: 120px;
   }
